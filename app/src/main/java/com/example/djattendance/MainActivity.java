@@ -15,14 +15,14 @@ import com.amazonaws.mobileconnectors.dynamodbv2.document.datatype.Document;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-
     private Button buttonRegister;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private Button buttonLogin;
     private ProgressDialog progressDialog;
-
     DatabaseAccess databaseAccess;
+
+    private final String USER_DDB_TABLE = "User";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         InitDbAsyncTask initDb = new InitDbAsyncTask();
         initDb.execute();
     }
-
     private void registerUser(){
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
@@ -95,8 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             registerUser();
         }
         if(view == buttonLogin){
-            startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
-            //loginUser();
+            loginUser();
         }
     }
 
@@ -113,20 +111,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private class CreateItemAsyncTask extends AsyncTask<Document, Void, Document> {
+    private class CreateItemAsyncTask extends AsyncTask<Document, Void, String> {
         @Override
-        protected Document doInBackground(Document... documents) {
-            databaseAccess.create(documents[0]);
-            return null;
+        protected String doInBackground(Document... documents) {
+            String email = editTextEmail.getText().toString().trim();
+
+            Document doc = databaseAccess.getDocByPrimaryKey(email, USER_DDB_TABLE);
+            if (doc == null) {
+                databaseAccess.create(documents[0], USER_DDB_TABLE);
+                return "Account created successfully";
+            }
+            else {
+                return "Email already exists! Try another email.";
+            }
         }
 
-        protected void onPostExecute(Document document) {
-//            if(document == null){
-//                Toast.makeText(MainActivity.this,"Email already exists. Try login", Toast.LENGTH_SHORT).show();
-//                return;
-//            }
+        protected void onPostExecute(String message) {
             progressDialog.dismiss();
-            Toast.makeText(MainActivity.this,"Account created successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this,message, Toast.LENGTH_SHORT).show();
+            if(message.startsWith("Email already exists")) {
+                return;
+            }
             finish();
             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
             Log.d("POST EXECUTE", "CreateItemAsyncTask completed");
@@ -136,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private class GetItemAsyncTask extends AsyncTask<String, Void, Document> {
         @Override
         protected Document doInBackground(String... username) {
-            return databaseAccess.getMemoById(username[0]);
+            return databaseAccess.getDocByPrimaryKey(username[0], USER_DDB_TABLE);
         }
 
         protected void onPostExecute(Document document) {

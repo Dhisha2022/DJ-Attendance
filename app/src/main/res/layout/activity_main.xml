@@ -24,7 +24,7 @@
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/img_1" />
+            app:srcCompat="@drawable/attendance" />
 
         <EditText
             android:id="@+id/editTextEmail"

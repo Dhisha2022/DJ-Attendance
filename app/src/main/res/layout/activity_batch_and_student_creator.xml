@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="124dp"
         android:layout_marginEnd="8dp"
         android:clipToPadding="false"
         android:gravity="center"
@@ -29,7 +29,7 @@
 
 
             <LinearLayout
-                android:id="@+id/linearLayoutEnroll"
+                android:id="@+id/linearLayoutAddStudent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -37,18 +37,18 @@
 
 
                 <ImageView
-                    android:id="@+id/addRoom"
+                    android:id="@+id/addStudent"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="@drawable/cerclebackgroundpink"
                     android:padding="10dp"
-                    android:src="@drawable/baseline_room_preferences_24" />
+                    android:src="@drawable/baseline_person_add_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Add Room"
+                    android:text="Add Student"
                     android:textStyle="bold" />
 
                 <View
@@ -64,125 +64,32 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="Add a New Room"
+                    android:text="Add a New Student"
                     android:textColor="@android:color/darker_gray" />
 
             </LinearLayout>
 
 
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="160dp"
-            android:layout_height="190dp"
-            android:layout_margin="10dp"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground">
-
-            <LinearLayout
-                android:id="@+id/linearLayoutRollcall"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/addStudent"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:background="@drawable/cerclebackgroundgreen"
-                    android:padding="10dp"
-                    android:src="@drawable/baseline_person_add_24" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Add student"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:background="@color/lightgray" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="Add student details"
-                    android:textColor="@android:color/darker_gray" />
-
-            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linear_layout_botom"
+        android:id="@+id/linear_layout_last"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="92dp"
+        android:layout_marginEnd="8dp"
         android:clipToPadding="false"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayoutbuttons"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linear_layout_top">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="160dp"
-            android:layout_height="190dp"
-            android:layout_margin="10dp"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground">
-
-            <LinearLayout
-                android:id="@+id/linearLayoutCheckAttendance"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/viewRooms"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:background="@drawable/cerclebackgroundyellow"
-                    android:padding="10dp"
-                    android:src="@drawable/baseline_meeting_room_24" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="View Rooms"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:background="@color/lightgray" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="View Room Details"
-                    android:textColor="@android:color/darker_gray" />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
 
         <androidx.cardview.widget.CardView
             android:layout_width="160dp"
@@ -192,19 +99,18 @@
             android:foreground="?android:attr/selectableItemBackground">
 
             <LinearLayout
-                android:id="@+id/linearLayoutChatbot"
+                android:id="@+id/linearLayoutViewStudents"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/viewStudents"
+                    android:id="@+id/updateStudents"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:background="@drawable/cerclebacgroundpurple"
-                    android:padding="10dp"
-                    android:src="@drawable/baseline_view_student_24" />
+                    android:background="@drawable/view_details"
+                    android:padding="10dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -224,27 +130,13 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="View students"
+                    android:text="View Students"
                     android:textColor="@android:color/darker_gray" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayoutbuttons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:paddingLeft="10dp"/>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

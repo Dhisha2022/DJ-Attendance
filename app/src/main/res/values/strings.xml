@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">DjAttendance</string>
+    <integer name="btnPlusView">1</integer>
+    <integer name="btnPlusPos">2</integer>
+    <string-array name="Batch">
+        <item>CS</item>
+        <item>EC</item>
+        <item>IS</item>
+        <item>ME</item>
+    </string-array>
 </resources>

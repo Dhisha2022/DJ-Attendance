@@ -15,16 +15,13 @@
         android:theme="@style/Theme.DjAttendance"
         tools:targetApi="31">
         <activity
-            android:name=".AddBatch"
+            android:name=".ViewStudents"
             android:exported="false" />
         <activity
-            android:name=".AddStudents"
+            android:name=".AddStudent"
             android:exported="false" />
         <activity
             android:name=".BatchAndStudentCreatorActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CreateBatchActivity"
             android:exported="false" />
         <activity
             android:name=".ChatBotActivity"
