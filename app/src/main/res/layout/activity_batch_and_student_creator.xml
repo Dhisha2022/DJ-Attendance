@@ -27,28 +27,26 @@
             android:layout_height="190dp"
             android:layout_margin="10dp">
 
-
             <LinearLayout
-                android:id="@+id/linearLayoutAddStudent"
+                android:id="@+id/linearLayoutAddRoom"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical">
 
-
                 <ImageView
-                    android:id="@+id/addStudent"
+                    android:id="@+id/addRoom"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:background="@drawable/cerclebackgroundpink"
+                    android:background="@drawable/cerclebackgroundblue"
                     android:padding="10dp"
-                    android:src="@drawable/baseline_person_add_24" />
+                    android:src="@drawable/baseline_add_room_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Add Student"
+                    android:text="Add Rooms"
                     android:textStyle="bold" />
 
                 <View
@@ -57,14 +55,12 @@
                     android:layout_margin="10dp"
                     android:background="@color/lightgray" />
 
-
                 <TextView
-                    android:id="@+id/cal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="Add a New Student"
+                    android:text="Add Rooms"
                     android:textColor="@android:color/darker_gray" />
 
             </LinearLayout>
@@ -99,24 +95,26 @@
             android:foreground="?android:attr/selectableItemBackground">
 
             <LinearLayout
-                android:id="@+id/linearLayoutViewStudents"
+                android:id="@+id/linearLayoutAddStudent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical">
 
+
                 <ImageView
-                    android:id="@+id/updateStudents"
+                    android:id="@+id/addStudent"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:background="@drawable/view_details"
-                    android:padding="10dp" />
+                    android:background="@drawable/cerclebackgroundgreen"
+                    android:padding="10dp"
+                    android:src="@drawable/baseline_person_add_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="View Students"
+                    android:text="Add Student"
                     android:textStyle="bold" />
 
                 <View
@@ -125,12 +123,14 @@
                     android:layout_margin="10dp"
                     android:background="@color/lightgray" />
 
+
                 <TextView
+                    android:id="@+id/cal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="View Students"
+                    android:text="Add a New Student"
                     android:textColor="@android:color/darker_gray" />
 
             </LinearLayout>

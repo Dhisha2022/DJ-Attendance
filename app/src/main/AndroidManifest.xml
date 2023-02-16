@@ -11,9 +11,22 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
+        android:name=".GlobalVariable"
         android:supportsRtl="true"
         android:theme="@style/Theme.DjAttendance"
         tools:targetApi="31">
+        <activity
+            android:name=".UserProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddRoomActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddComplaintsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddVisitorActivity"
+            android:exported="false" />
         <activity
             android:name=".ViewStudents"
             android:exported="false" />

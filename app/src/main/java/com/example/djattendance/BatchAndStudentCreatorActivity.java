@@ -12,16 +12,16 @@ import android.widget.Toast;
 
 public class BatchAndStudentCreatorActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private LinearLayout viewAddStudent, viewViewStudents;
+    private LinearLayout viewAddStudent, viewAddRoom;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_batch_and_student_creator);
 
-        viewViewStudents = (LinearLayout) findViewById(R.id.linearLayoutViewStudents);
+        viewAddRoom = (LinearLayout) findViewById(R.id.linearLayoutAddRoom);
         viewAddStudent = (LinearLayout) findViewById(R.id.linearLayoutAddStudent);
 
-        viewViewStudents.setOnClickListener(this);
+        viewAddRoom.setOnClickListener(this);
         viewAddStudent.setOnClickListener(this);
     }
 
@@ -30,8 +30,8 @@ public class BatchAndStudentCreatorActivity extends AppCompatActivity implements
         if(view == viewAddStudent){
             startActivity(new Intent(getApplicationContext(),AddStudent.class));
         }
-        if(view == viewViewStudents){
-            startActivity(new Intent(getApplicationContext(),ViewStudents.class));
+        if(view == viewAddRoom){
+            startActivity(new Intent(getApplicationContext(),AddRoomActivity.class));
         }
     }
 

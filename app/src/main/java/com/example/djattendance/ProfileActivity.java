@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.UUID;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
-    private LinearLayout buttonEnrollBatch, buttonChatbot, buttonRollcall, buttonCheckAttendance;
+    private LinearLayout buttonEnrollBatch, buttonChatbot, buttonRollcall, buttonCheckAttendance, buttonComplaints, buttonVistors;
     private static final String TAG = "ProfileActivity";
 
     @Override
@@ -24,11 +24,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         buttonEnrollBatch = findViewById(R.id.linearLayoutEnroll);
         buttonRollcall = findViewById(R.id.linearLayoutRollCall);
         buttonCheckAttendance = findViewById( R.id.linearLayoutCheckAttendance);
-
+        buttonVistors = findViewById(R.id.linearLayoutAddVisitor);
+        buttonComplaints = findViewById(R.id.linearLayoutAddComplaints);
         buttonChatbot.setOnClickListener(this);
         buttonEnrollBatch.setOnClickListener(this);
         buttonRollcall.setOnClickListener(this);
         buttonCheckAttendance.setOnClickListener(this);
+        buttonVistors.setOnClickListener(this);
+        buttonComplaints.setOnClickListener(this);
     }
 
 
@@ -44,24 +47,27 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         if ( view == buttonChatbot){
             startActivity(new Intent(this,ChatBotActivity.class));
-            //startActivity(new Intent(this,EmptyDatabase.class));
         }
 
         if ( view == buttonEnrollBatch){
-            startActivity(new Intent(this, AddStudent.class));
-            //startActivity(new Intent(this,RegisterClass.class));
+            startActivity(new Intent(this, BatchAndStudentCreatorActivity.class));
         }
 
         if ( view == buttonRollcall){
-            startActivity(new Intent(this,RollcallActivity.class));
-            //startActivity(new Intent(this,AttendanceMiddleware.class));
+            startActivity(new Intent(this, RollcallActivity.class));
         }
 
         if ( view == buttonCheckAttendance ){
-            startActivity(new Intent(this,CheckAttendanceActivity.class));
-            //startActivity(new Intent(this, CheckAttendance.class));
+            startActivity(new Intent(this, CheckAttendanceActivity.class));
         }
 
+        if ( view == buttonVistors ){
+            startActivity(new Intent(this, AddVisitorActivity.class));
+        }
+
+        if ( view == buttonComplaints ){
+            startActivity(new Intent(this, AddComplaintsActivity.class));
+        }
 
     }
 }

@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -139,7 +140,7 @@ public class RollcallActivity extends AppCompatActivity {
     private class CreateItemAsyncTask extends AsyncTask<Boolean, Void, Document> {
         @Override
         protected Document doInBackground(Boolean... leave) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
             String currentDate = sdf.format(new Date());
             String batchSelectedVal = batchSelectSpinner.getSelectedItem().toString();
             rollCallDatabaseAccess.createAttendance(

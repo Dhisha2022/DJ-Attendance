@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.amazonaws.mobileconnectors.dynamodbv2.document.datatype.Document;
@@ -16,12 +18,14 @@ import com.amazonaws.mobileconnectors.dynamodbv2.document.datatype.Document;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button buttonRegister;
-    private EditText editTextEmail;
+    private EditText editTextEmail, editTextUserName;
     private EditText editTextPassword;
     private Button buttonLogin;
     private ProgressDialog progressDialog;
     DatabaseAccess databaseAccess;
 
+    String userVal;
+    private RadioGroup branchRadioGroup;
     private final String USER_DDB_TABLE = "User";
 
     @Override
@@ -32,9 +36,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         progressDialog = new ProgressDialog(this);
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
+        editTextUserName = (EditText)findViewById(R.id.editTextUserName);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         buttonLogin = (Button) findViewById(R.id.textViewLogin);
-
+        branchRadioGroup = (RadioGroup) findViewById(R.id.radioGroupUser);
         buttonRegister.setOnClickListener(this);
         buttonLogin.setOnClickListener(this);
 
@@ -42,9 +47,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initDb.execute();
     }
     private void registerUser(){
+        String name = editTextUserName.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
+
+        if(TextUtils.isEmpty(name)){
+            // email is empty
+            Toast.makeText(this,"Please enter Name", Toast.LENGTH_SHORT).show();
+            return; //stop function from executing further
+        }
         if(TextUtils.isEmpty(email)){
             // email is empty
             Toast.makeText(this,"Please enter Email Address", Toast.LENGTH_SHORT).show();
@@ -63,13 +75,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Document user = new Document();
         user.put("email", email);
         user.put("password", password);
+        user.put("user", userVal);
+        user.put("name", name);
         createItemAsyncTask.execute(user);
     }
 
     private void loginUser(){
+        String name = editTextUserName.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
+        if(TextUtils.isEmpty(name)){
+            // email is empty
+            Toast.makeText(this,"Please enter Name", Toast.LENGTH_SHORT).show();
+            return; //stop function from executing further
+        }
         if(TextUtils.isEmpty(email)){
             // email is empty
             Toast.makeText(this,"Please enter Email Address", Toast.LENGTH_SHORT).show();
@@ -90,6 +110,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+
+        int radioButtonID = branchRadioGroup.getCheckedRadioButtonId();
+        View radioButton = branchRadioGroup.findViewById(radioButtonID);
+        int idx = branchRadioGroup.indexOfChild(radioButton);
+        RadioButton r = (RadioButton) branchRadioGroup.getChildAt(idx);
+        userVal = r.getText().toString();
+
+        ((GlobalVariable) this.getApplication()).setUserName(editTextUserName.getText().toString());
+
         if(view == buttonRegister){
             registerUser();
         }
@@ -132,8 +161,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(message.startsWith("Email already exists")) {
                 return;
             }
-            finish();
-            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+            if(userVal.equals("Student")) {
+                finish();
+                startActivity(new Intent(getApplicationContext(),UserProfileActivity.class));
+            }
+            if(userVal.equals("Admin")) {
+                finish();
+                startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+            }
             Log.d("POST EXECUTE", "CreateItemAsyncTask completed");
         }
     }
@@ -153,14 +188,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             else{
                 String password = editTextPassword.getText().toString().trim();
                 try{
-                    System.out.println("Get Result" + document.get("password").asString());
-                    if(document.get("password").asString().equals(password)) {
-                        finish();
-                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                    System.out.println("User " + document.get("user").asString());
+                    System.out.println("UserVal " + userVal);
+                    System.out.println("Get Result " + document.get("password").asString());
+                    String user = document.get("user").asString();
+                    if(document.get("password").asString().equals(password) && userVal.equals(user)) {
+
+                        if(userVal.equals("Student")) {
+                            finish();
+                            startActivity(new Intent(getApplicationContext(),UserProfileActivity.class));
+                        }
+                        if(userVal.equals("Admin")) {
+                            finish();
+                            startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                        }
                     }
                     else {
-                        Toast.makeText(MainActivity.this,"Password Incorrect! " +
-                                "Please try again", Toast.LENGTH_SHORT).show();
+                        if(userVal.equals(user)) {
+                            Toast.makeText(MainActivity.this,"User not registered as " +
+                                    userVal, Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(MainActivity.this,"Password Incorrect!" +
+                                    "Please try again", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }catch(Exception exception) {
                     Toast.makeText(MainActivity.this,"Password Incorrect",

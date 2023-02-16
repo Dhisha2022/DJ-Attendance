@@ -1,6 +1,7 @@
 package com.example.djattendance;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.dynamodbv2.document.Expression;
@@ -52,6 +53,17 @@ public class DatabaseAccess {
         return dbTable.putItem(memo, config);
     }
 
+    public Document addStudent(Document memo, String table, String roomTable, Document room) {
+        Table dbTable = Table.loadTable(dbClient, table);
+        PutItemOperationConfig config = new PutItemOperationConfig();
+        config.setReturnValue(ReturnValue.ALL_OLD);
+        Document putItemDoc = dbTable.putItem(memo, config);
+
+        // Update Room table to reflect availability
+        Table dbTable2 = Table.loadTable(dbClient, roomTable);
+        return dbTable2.putItem(room, config);
+    }
+
     /**
      * Update an existing memo in the database
      * @param memo the memo to save
@@ -90,6 +102,14 @@ public class DatabaseAccess {
         return dbTable.scan(expression).getAllResults();
     }
 
+    public List<Document> scanTableForAvailableRooms(String table) {
+        Table dbTable = Table.loadTable(dbClient, table);
+        final Expression expression = new Expression();
+        expression.setExpressionStatement("availability <> :availability");
+        expression.withExpressionAttibuteValues(":availability", new Primitive(0));
+        return dbTable.scan(expression).getAllResults();
+    }
+
     public Void createAttendance(ArrayList<Model> selectedStudents, String batch, String date, String table, Boolean leave) {
         Table dbTable = Table.loadTable(dbClient, table);
         PutItemOperationConfig config = new PutItemOperationConfig();
@@ -104,8 +124,8 @@ public class DatabaseAccess {
             if(leave) {
                 if(name.getSelected()) {
                     doc.put("attendance", "on leave");
+                    dbTable.putItem(doc, config);
                 }
-                dbTable.putItem(doc, config);
             }
             else {
                 if(name.getSelected()) {
@@ -121,5 +141,12 @@ public class DatabaseAccess {
         return null;
     }
 
+    public List<Document> getAttendance(String table, String student) {
+        Table dbTable = Table.loadTable(dbClient, table);
+        final Expression expression = new Expression();
+        expression.setExpressionStatement("student = :student");
+        expression.withExpressionAttibuteValues(":student", new Primitive(student));
+        return dbTable.scan(expression).getAllResults();
+    }
 
 }

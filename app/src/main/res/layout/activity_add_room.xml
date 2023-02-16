@@ -4,11 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddStudent">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fillViewport="true">
+    tools:context=".AddRoomActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:ems="10"
-            android:text="Add Student Details"
+            android:text="Add Room Details"
             android:textColor="@color/black"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,24 +32,25 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/name"
+            android:id="@+id/room_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:ems="10"
-            android:hint="Student Name"
+            android:hint="Room Name"
+            android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.184"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/branch"
+            android:id="@+id/branchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:ems="10"
-            android:text="Room"
+            android:text="Branch"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.118"
@@ -60,19 +58,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
-            android:id="@+id/radioGroupBatch"
+            android:id="@+id/BatchGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:checkedButton="@+id/cs"
+            android:checkedButton="@+id/csBatch"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.834"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:onClick="onRadioButtonClicked">
+            app:layout_constraintTop_toTopOf="parent">
 
             <RadioButton
-                android:id="@+id/cs"
+                android:id="@+id/csBatch"
                 android:layout_width="107dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -83,7 +80,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <RadioButton
-                android:id="@+id/ec"
+                android:id="@+id/ecBatch"
                 android:layout_width="104dp"
                 android:layout_height="wrap_content"
                 android:text="EC"
@@ -93,7 +90,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <RadioButton
-                android:id="@+id/is"
+                android:id="@+id/isBatch"
                 android:layout_width="104dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -104,7 +101,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <RadioButton
-                android:id="@+id/me"
+                android:id="@+id/meBatch"
                 android:layout_width="104dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -116,103 +113,97 @@
         </RadioGroup>
 
         <EditText
-            android:id="@+id/dob"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:clickable="false"
-            android:cursorVisible="false"
-            android:ems="10"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:hint="Student DOB"
-            android:inputType="date"
-            android:selectAllOnFocus="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.151"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/parent_name"
+            android:id="@+id/capacity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:ems="10"
-            android:hint="Parent Name"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.919"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/parent_phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:ems="10"
-            android:hint="Parent Phone"
-            android:inputType="phone"
+            android:hint="Room Bed Capacity"
+            android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.194"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/phone"
+            android:id="@+id/beds_available"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:ems="10"
-            android:hint="Student Phone"
-            android:inputType="phone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.194"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:ems="10"
-            android:hint="Home Address"
-            android:inputType="text"
+            android:hint="Beds Available"
+            android:inputType="number"
             android:maxLines="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.194"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/student_email"
+        <TextView
+            android:id="@+id/facilities"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:ems="10"
-            android:hint="Student Email"
-            android:inputType="textEmailAddress"
-            android:maxLines="2"
+            android:hint="Facilities Available" />
+
+        <GridLayout
+            android:id="@+id/facilities_grid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.194"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/beds_available">
+
+            <CheckBox
+                android:id="@+id/table"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:text="Table" />
+
+            <CheckBox
+                android:id="@+id/chair"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:text="Chair" />
+
+            <CheckBox
+                android:id="@+id/fan"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_row="2"
+                android:layout_column="0"
+                android:text="Fan" />
+
+            <CheckBox
+                android:id="@+id/wardrobe"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_row="2"
+                android:text="Wardrobe" />
+
+
+        </GridLayout>
+
+        <EditText
+            android:id="@+id/spot_rent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:ems="10"
+            android:hint="Room Bed Rent"
+            android:inputType="number"
+            android:maxLines="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.194"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <Spinner
-            android:id="@+id/RoomSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/green"
-            android:paddingBottom="25dp"
-            android:layout_marginTop="25dp"
-            android:ems="10"
-            android:drawSelectorOnTop="true"
-            android:textSize="150sp"/>
 
         <Button
-            android:id="@+id/submit_visitor"
+            android:id="@+id/submit_room"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -221,7 +212,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.425"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/facilities_grid" />
+
     </LinearLayout>
-    </ScrollView>
 </androidx.core.widget.NestedScrollView>
