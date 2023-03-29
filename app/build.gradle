@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.djattendance'
+    namespace 'com.DJACompany.djattendance'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.djattendance"
+        applicationId "com.DJACompany.djattendance"
         minSdk 26
         targetSdk 33
         versionCode 1
